@@ -1,6 +1,6 @@
-import { AgentRole } from './agent.types'
-import { Finding } from './finding.types'
-import { ProjectShape } from './codebase.types'
+import type { AgentRole } from './agent.types'
+import type { Finding } from './finding.types'
+import type { ProjectShape } from './codebase.types'
 
 export interface SpecialistReport {
   agent: AgentRole

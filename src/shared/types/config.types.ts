@@ -1,4 +1,4 @@
-import { AgentRole } from "./agent.types"
+import type { AgentRole } from "./agent.types"
 
 export interface AuditConfig {
   agents?: AgentRole[]
