@@ -1,5 +1,6 @@
 import { ConfigError } from '@/shared/errors'
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function requireEnv(key: string): string {
   const value = process.env[key]
   if (!value) throw new ConfigError(`Missing required environment variable: ${key}`)

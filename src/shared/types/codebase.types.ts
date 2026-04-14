@@ -62,10 +62,14 @@ export interface SecuritySignals {
 }
 
 export interface ArchitectureSignals {
-  inferredModules: string[]
+  topLevelFolders: string[]
+  srcSubFolders: string[]
+  maxDepth: number
   hasBarrelExports: boolean
   hasCIConfig: boolean
   configFiles: string[]
+  isMonorepo: boolean
+  isFlatStructure: boolean
 }
 
 
@@ -74,6 +78,7 @@ export interface RawCodebaseData {
   fileTree: FileNode[]
   coreFiles: IndexedFile[]
   sampledFiles: IndexedFile[]
+  failedReads: string[]  // absolute paths of files that could not be read
   signals: {
     tests: TestSignals
     dependencies: DependencySignals
