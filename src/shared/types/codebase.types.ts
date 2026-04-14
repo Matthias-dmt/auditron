@@ -1,4 +1,13 @@
-import type { AgentRole } from "./agent.types"
+import type { AgentRole } from './agent.types'
+
+export interface FileNode {
+  name: string
+  relativePath: string
+  type: 'file' | 'directory'
+  sizeBytes?: number
+  lineCount?: number
+  children?: FileNode[]
+}
 
 export interface IndexedFile {
   path: string
@@ -15,33 +24,65 @@ export interface ProjectShape {
   architecturePattern: string
   packageManager: 'npm' | 'yarn' | 'pnpm' | 'bun' | 'unknown'
   language: 'typescript' | 'javascript' | 'mixed'
-  hasTests: boolean
-  hasCIConfig: boolean
   entryPoints: string[]
   unusualPatterns: string[]
   specialistGuidance: Partial<Record<AgentRole, string>>
 }
 
-export interface CodebaseIndex {
-  rootPath: string
-  shape: ProjectShape
-  fileTree: FileNode[]
-  coreFiles: IndexedFile[]                 
-  sampledFiles: IndexedFile[]          
-  dependencies: {
-    direct: Record<string, string>
-    dev: Record<string, string>
-    lockfilePresent: boolean
-  }
+export interface TestSignals {
+  hasTests: boolean
+  testFiles: string[]
+  sourceFiles: string[]
+  testToSourceRatio: number
+  largestUntestedFiles: string[]
+  testFramework: string | null
+}
+
+export interface DependencySignals {
+  direct: Record<string, string>
+  dev: Record<string, string>
+  lockfilePresent: boolean
+  totalDependencies: number
+}
+
+export interface ComplexitySignals {
+  largeFiles: Array<{
+    relativePath: string
+    lineCount: number
+  }>
+  averageFileSize: number
   totalFiles: number
   sampledFilesCount: number
 }
 
-export interface FileNode {
-  name: string
-  relativePath: string
-  type: 'file' | 'directory'
-  sizeBytes?: number
-  lineCount?: number
-  children?: FileNode[]
+export interface SecuritySignals {
+  sensitivePathCandidates: string[]
+  hasEnvExample: boolean
+  hasDotEnv: boolean
+}
+
+export interface ArchitectureSignals {
+  inferredModules: string[]
+  hasBarrelExports: boolean
+  hasCIConfig: boolean
+  configFiles: string[]
+}
+
+
+export interface RawCodebaseData {
+  rootPath: string
+  fileTree: FileNode[]
+  coreFiles: IndexedFile[]
+  sampledFiles: IndexedFile[]
+  signals: {
+    tests: TestSignals
+    dependencies: DependencySignals
+    complexity: ComplexitySignals
+    security: SecuritySignals
+    architecture: ArchitectureSignals
+  }
+}
+
+export interface CodebaseIndex extends RawCodebaseData {
+  shape: ProjectShape
 }
