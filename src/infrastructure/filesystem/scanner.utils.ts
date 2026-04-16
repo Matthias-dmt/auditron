@@ -7,6 +7,7 @@ import {
   TIER2_EXTENSIONS,
   TIER2_KEYWORDS,
   TIER3_PATTERNS,
+  TIER4_FILENAMES,
   type FileTier,
 } from './scanner.types'
 
@@ -22,6 +23,7 @@ export function shouldExclude(name: string): boolean {
 }
 
 export function classifyFile(relativePath: string, name: string): FileTier {
+  if (TIER4_FILENAMES.has(name)) return 4
   if (TIER1_FILENAMES.has(name)) return 1
   if (TIER3_PATTERNS.some((pattern) => pattern.test(name))) return 3
 

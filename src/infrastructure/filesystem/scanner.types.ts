@@ -116,3 +116,12 @@ export const TIER3_PATTERNS = [
   /\.spec\.(ts|js|tsx|jsx)$/,
   /\.stories\.(ts|js|tsx|jsx)$/,
 ]
+
+// ─── Tier 4 Patterns ─────────────────────────────────────────────────────────
+
+export const TIER4_FILENAMES = new Set([
+  'pnpm-lock.yaml',
+  'yarn.lock',
+  'package-lock.json',
+  'bun.lockb',
+])
