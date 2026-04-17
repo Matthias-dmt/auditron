@@ -1,7 +1,7 @@
 import 'dotenv/config'
 import { AuditronError } from "@/shared/errors"
 import { scanCodebase } from '@/infrastructure/filesystem/scanner'
-import { runParser } from '@/agents/parser/parser'
+import { runParser } from '@/pipeline/parser/parser'
 import { OllamaAdapter } from '@/infrastructure/llm/ollama'
 import { config } from '@/infrastructure/config'
 

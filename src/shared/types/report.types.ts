@@ -2,13 +2,17 @@ import type { AgentRole } from './agent.types'
 import type { Finding } from './finding.types'
 import type { ProjectShape } from './codebase.types'
 
+export type SpecialistStatus = 'success' | 'failed'
+
 export interface SpecialistReport {
   agent: AgentRole
-  findings: Finding[]
+  findings: Finding[],
+  status: SpecialistStatus
   summary: string
   healthScore: number                    
   chunksProcessed: number
-  rawLLMOutput: string[]
+  rawLLMOutput: string[],
+  error?: string  
 }          
 
 export interface AuditResult {
